@@ -4,7 +4,7 @@ ShopBot is an innovative solution designed to transform your online shopping pla
 
 ## Features
 
-- **Intelligent Chatbot**: ShopBot comes equipped with a sophisticated chatbot powered by advanced algorithms and probabilities. It enables customers to ask questions, seek recommendations, and get personalized assistance, enhancing the shopping experience.
+- **Intelligent Chatbot**: ShopBot comes equipped with a sophisticated chatbot powered by advanced algorithms and probability density functions. It enables customers to ask questions, seek recommendations, and get personalized assistance, enhancing the shopping experience.
 - **Push Notifications**: Stay connected with your customers by sending push notifications about new product launches, exclusive offers, or upcoming sales. Keep them engaged and informed even when they are not actively browsing your website.
 - **Efficient Product Browsing**: ShopBot offers seamless product browsing capabilities across various categories, enabling customers to explore your wide range of offerings with ease. They can search for products based on their preferences.
 - **Add to Cart**: Enable customers to conveniently add products to their shopping cart directly from the chatbot interface. This streamlined process saves time and simplifies the shopping experience.
