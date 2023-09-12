@@ -18,3 +18,15 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
+
+- task: CopyFiles@2
+  displayName: 'Copy Backend Code'
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/server'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/backend'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Backend Artifact'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/backend'
+    ArtifactName: 'backend'
