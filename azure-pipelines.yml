@@ -26,8 +26,13 @@ steps:
 - script: |
     npm install -g eslint
     eslint --init
-    eslint '**/*.js'
+    eslint '**/*.js' > eslint-report.txt 2>&1
   displayName: 'ESLint Code Analysis'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish ESLint Report'
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)'
+    ArtifactName: 'eslint-report'  
 - task: CopyFiles@2
   displayName: 'Copy Backend Code'
   inputs:
