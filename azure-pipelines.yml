@@ -72,7 +72,8 @@ stages:
     - script: |
         git config user.email "khwajafarazahmed@yahoo.com"
         git config user.name "Faraz Khawaja"
-        git commit -am "Update dependencies"
-        git push origin master
+        git add package.json
+        git commit -m "Update dependencies"
+        git push origin main
       displayName: 'Commit and Push Updates'  
 
