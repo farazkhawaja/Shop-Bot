@@ -66,12 +66,7 @@ stages:
 
     - script: |
          cd server
-         outdated=$(npm outdated)
-         if [ -z "$outdated" ]; then
-          echo "No outdated packages found. All packages are up to date."
-         else
-          npm update --verbose
-         fi
+         npm update --verbose
          
       displayName: 'Check and Update Dependencies'
 
