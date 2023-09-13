@@ -67,8 +67,7 @@ stages:
     - script: |
 
          cd server
-         ncu -u --upgradeAll
-         npm install
+         ncu -u 
       displayName: 'Check and Update Dependencies'
     - script: |
         git config user.email "khwajafarazahmed@yahoo.com"
