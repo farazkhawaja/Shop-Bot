@@ -69,7 +69,7 @@ stages:
          ncu -u 
       displayName: 'Check and Update Dependencies'
     - script: |
-        git status
+        git branch 
         git add server/package.json
         git commit -m "Update dependencies"
         git push -u origin main
