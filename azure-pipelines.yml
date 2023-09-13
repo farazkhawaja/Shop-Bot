@@ -67,7 +67,7 @@ stages:
     - script: |
 
          cd server
-         ncu -u 
+         ncu -u --upgradeAll
          npm install
       displayName: 'Check and Update Dependencies'
     - script: |
