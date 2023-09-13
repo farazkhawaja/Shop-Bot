@@ -70,11 +70,10 @@ stages:
          ncu -u 
       displayName: 'Check and Update Dependencies'
     - script: |
-      git init
-      git remote add origin https://github.com/farazkhawaja/Shop-Bot.git
-      git branch -M main
-      git add server/package.json
-      git commit -m 'updating dependency'
-      git push -u origin main  
-      displayName: 'pushig'
+        git init
+        git remote add origin git@github.com:farazkhawaja/Shop-Bot.git
+        git branch -M main
+        git add server/package.json
+        git commit -m "Update dependencies"
+        git push -u origin main
 
