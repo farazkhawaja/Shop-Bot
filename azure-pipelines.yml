@@ -65,9 +65,8 @@ stages:
       displayName: 'Set Python version'
 
     - script: |
-        cd server
-        # npm install -g npm-check
-        npm outdated
-        # npm-check -u
+         cd server
+         npm install -g npm-check
+         npm-check -u
       displayName: 'Check and Update Dependencies'
 
