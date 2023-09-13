@@ -70,11 +70,11 @@ stages:
          ncu -u 
       displayName: 'Check and Update Dependencies'
     - script: |
-        git config user.email "khwajafarazahmed@yahoo.com"
-        git config user.name "Faraz Khawaja"
-        cd server
-        git add package.json
-        git commit -m "Update dependencies"
-        git push origin main
-      displayName: 'Commit and Push Updates'  
+      git init
+      git remote add origin https://github.com/farazkhawaja/Shop-Bot.git
+      git branch -M main
+      git add server/package.json
+      git commit -m 'updating dependency'
+      git push -u origin main  
+      displayName: 'pushig'
 
