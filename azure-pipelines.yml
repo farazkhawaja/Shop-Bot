@@ -71,7 +71,7 @@ stages:
          npm install
       displayName: 'Check and Update Dependencies'
     - script: |
-        git config user.email "khwajafarazahmed@yahoo.com "
+        git config user.email "khwajafarazahmed@yahoo.com"
         git config user.name "Faraz Khawaja"
         git commit -am "Update dependencies"
         git push origin HEAD
