@@ -18,7 +18,16 @@ steps:
     npm install
     npm run build
   displayName: 'npm install+build'
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+    addToPath: true
 
+- script: |
+    npm install -g eslint
+    eslint --init
+    eslint '**/*.js'
+  displayName: 'ESLint Code Analysis'
 - task: CopyFiles@2
   displayName: 'Copy Backend Code'
   inputs:
