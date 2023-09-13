@@ -73,6 +73,6 @@ stages:
         git config user.email "khwajafarazahmed@yahoo.com"
         git config user.name "Faraz Khawaja"
         git commit -am "Update dependencies"
-        git push origin HEAD
+        git push origin main
       displayName: 'Commit and Push Updates'  
 
