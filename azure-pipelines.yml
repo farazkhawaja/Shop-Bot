@@ -70,7 +70,7 @@ stages:
       displayName: 'Check and Update Dependencies'
     - script: |
         
-        git add .
+        git add server/package.json
         git commit -m "Update dependencies"
         git push -u origin HEAD:main
       displayName: 'Pushing to github'
