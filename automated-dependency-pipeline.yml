@@ -1,8 +1,10 @@
+# azure-pipelines-automated-dependency.yml
+
 trigger: none
 
 schedules:
-- cron: "44 9 * * *"
-  displayName: Daily 2:40 PM GMT+5
+- cron: "53 9 * * *"
+  displayName: Every day at midnight
   branches:
     include:
     - main
@@ -12,27 +14,50 @@ pool:
   name: default
 
 stages:
-- stage: AutomatedDependencyUpdate
+- stage: AutomatedDependencyUpdateServer
   jobs:
-  - job: AutomatedDependencyUpdateJob
+  - job: AutomatedDependencyUpdateServerJob
     steps:
     - task: UsePythonVersion@0
       inputs:
         versionSpec: '3.x'
         addToPath: true
       displayName: 'Set Python version'
-  
+
     - script: |
-         cd client
+         cd server
          ncu -u 
-         cd ../server
-         ncu -u
-      displayName: 'Check and Update Dependencies (Server and Client)'
+      displayName: 'Check and Update Dependencies (Server)'
 
     - script: |
         git config --global user.email "khwajafarazahmed@yahoo.com"
         git config --global user.name "Faraz Khawaja"
-        git add server/package.json client/package.json
-        git commit -m "Update dependencies (Server and Client)"
+        git add server/package.json
+        git commit -m "Update dependencies (Server)"
         git push -u origin HEAD:main
-      displayName: 'Pushing to GitHub (Server and Client)'
+      displayName: 'Pushing to GitHub (Server)'
+
+- stage: AutomatedDependencyUpdateClient
+  jobs:
+  - job: AutomatedDependencyUpdateClientJob
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.x'
+        addToPath: true
+      displayName: 'Set Python version'
+
+    - script: |
+         cd client
+         ncu -u 
+      displayName: 'Check and Update Dependencies (Client)'
+
+    - script: |
+        git config --global user.email "khwajafarazahmed@yahoo.com"
+        git config --global user.name "Faraz Khawaja"
+        git add client/package.json
+        git commit -m "Update dependencies (Client)"
+        git push -u origin HEAD:main
+      displayName: 'Pushing to GitHub (Client)'
+
+
