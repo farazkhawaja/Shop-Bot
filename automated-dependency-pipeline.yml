@@ -21,16 +21,18 @@ stages:
         versionSpec: '3.x'
         addToPath: true
       displayName: 'Set Python version'
-
+  
     - script: |
          cd server
          ncu -u 
-      displayName: 'Check and Update Dependencies'
+         cd ../client
+         ncu -u
+      displayName: 'Check and Update Dependencies (Server and Client)'
 
     - script: |
         git config --global user.email "khwajafarazahmed@yahoo.com"
         git config --global user.name "Faraz Khawaja"
-        git add server/package.json
-        git commit -m "Update dependencies"
+        git add server/package.json client/package.json
+        git commit -m "Update dependencies (Server and Client)"
         git push -u origin HEAD:main
-      displayName: 'Pushing to GitHub'
+      displayName: 'Pushing to GitHub (Server and Client)'
