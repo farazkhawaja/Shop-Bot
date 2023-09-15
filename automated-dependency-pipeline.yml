@@ -1,7 +1,7 @@
 trigger: none
 
 schedules:
-- cron: "40 9 * * *"
+- cron: "44 9 * * *"
   displayName: Daily 2:40 PM GMT+5
   branches:
     include:
@@ -23,9 +23,9 @@ stages:
       displayName: 'Set Python version'
   
     - script: |
-         cd server
+         cd client
          ncu -u 
-         cd ../client
+         cd ../server
          ncu -u
       displayName: 'Check and Update Dependencies (Server and Client)'
 
