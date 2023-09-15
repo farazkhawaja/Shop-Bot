@@ -34,7 +34,7 @@ stages:
         git config --global user.name "Faraz Khawaja"
         git add server/package.json
         git commit -m "Update dependencies (Server)"
-        git push -u origin HEAD:main
+        git push --force -u origin HEAD:main
       displayName: 'Pushing to GitHub (Server)'
 
 - stage: AutomatedDependencyUpdateClient
