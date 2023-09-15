@@ -58,7 +58,7 @@ stages:
         git config --global user.name "Faraz Khawaja"
         git add client/package.json
         git commit -m "Update dependencies (Client)"
-        git push --force -u origin HEAD:main
+        git push -u origin HEAD:main
       displayName: 'Pushing to GitHub (Client)'
 
 
