@@ -28,6 +28,8 @@ stages:
       displayName: 'Check and Update Dependencies'
 
     - script: |
+        git config --global user.email "khwajafarazahmed@yahoo.com"
+        git config --global user.name "Faraz Khawaja"
         git add server/package.json
         git commit -m "Update dependencies"
         git push -u origin HEAD:main
