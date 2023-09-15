@@ -5,6 +5,14 @@
 
 trigger:
 - main
+schedules:
+- cron: "0 0 * * *"
+  displayName: Every day at midnight
+  branches:
+    include:
+    - main
+  always: true
+
 pool:
   name: default
 
