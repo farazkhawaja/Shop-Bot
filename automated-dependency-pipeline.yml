@@ -1,0 +1,34 @@
+trigger: none
+
+schedules:
+- cron: "0 0 * * *"
+  displayName: Every day at midnight
+  branches:
+    include:
+    - main
+  always: true
+
+pool:
+  name: default
+
+stages:
+- stage: AutomatedDependencyUpdate
+  jobs:
+  - job: AutomatedDependencyUpdateJob
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.x'
+        addToPath: true
+      displayName: 'Set Python version'
+
+    - script: |
+         cd server
+         ncu -u 
+      displayName: 'Check and Update Dependencies'
+
+    - script: |
+        git add server/package.json
+        git commit -m "Update dependencies"
+        git push -u origin HEAD:main
+      displayName: 'Pushing to GitHub'
