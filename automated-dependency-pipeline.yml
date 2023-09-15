@@ -3,7 +3,7 @@
 trigger: none
 
 schedules:
-- cron: "03 10 * * *"
+- cron: "0 19 * * *"
   displayName: Every day at midnight
   branches:
     include:
