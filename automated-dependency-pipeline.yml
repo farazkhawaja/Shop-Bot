@@ -1,8 +1,8 @@
 trigger: none
 
 schedules:
-- cron: "30 9 * * *"
-  displayName: Daily 2:30 PM GMT+5
+- cron: "40 9 * * *"
+  displayName: Daily 2:40 PM GMT+5
   branches:
     include:
     - main
