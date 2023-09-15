@@ -56,9 +56,9 @@ stages:
     - script: |
         git config --global user.email "khwajafarazahmed@yahoo.com"
         git config --global user.name "Faraz Khawaja"
+        git pull origin HEAD:main
         git add client/package.json
         git commit -m "Update dependencies (Client)"
-        git pull origin HEAD:main
         git push -u origin HEAD:main
       displayName: 'Pushing to GitHub (Client)'
 
