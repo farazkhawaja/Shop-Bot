@@ -9,50 +9,50 @@ pool:
   name: default
 
 stages:
-# - stage: BuildAndAnalyze
-#   jobs:
-#   - job: BuildAndAnalyzeJob
-#     steps:
-#     - task: NodeTool@0
-#       inputs:
-#         versionSpec: '12.x'
-#       displayName: 'Install Node.js'
+- stage: BuildAndAnalyze
+  jobs:
+  - job: BuildAndAnalyzeJob
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '12.x'
+      displayName: 'Install Node.js'
 
-#     - script: |
-#         npm install
-#         npm run build
-#       displayName: 'npm install+build'
+    - script: |
+        npm install
+        npm run build
+      displayName: 'npm install+build'
 
-#     - task: UsePythonVersion@0
-#       inputs:
-#         versionSpec: '3.x'
-#         addToPath: true
-#       displayName: 'Set Python version'
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.x'
+        addToPath: true
+      displayName: 'Set Python version'
 
-#     - script: |
-#         npm install -g eslint
-#         eslint --init
-#         eslint . > eslint-report.txt 2>&1
-#       displayName: 'ESLint Code Analysis'
+    - script: |
+        npm install -g eslint
+        eslint --init
+        eslint . > eslint-report.txt 2>&1
+      displayName: 'ESLint Code Analysis'
 
-#     - task: PublishBuildArtifacts@1
-#       displayName: 'Publish ESLint Report'
-#       inputs:
-#         PathtoPublish: '$(System.DefaultWorkingDirectory)'
-#         ArtifactName: 'eslint-report'
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish ESLint Report'
+      inputs:
+        PathtoPublish: '$(System.DefaultWorkingDirectory)'
+        ArtifactName: 'eslint-report'
 
-#     - task: CopyFiles@2
-#       displayName: 'Copy Backend Code'
-#       inputs:
-#         SourceFolder: '$(Build.SourcesDirectory)/server'
-#         Contents: '**'
-#         TargetFolder: '$(Build.ArtifactStagingDirectory)/backend'
+    - task: CopyFiles@2
+      displayName: 'Copy Backend Code'
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)/server'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/backend'
 
-#     - task: PublishBuildArtifacts@1
-#       displayName: 'Publish Backend Artifact'
-#       inputs:
-#         PathtoPublish: '$(Build.ArtifactStagingDirectory)/backend'
-#         ArtifactName: 'backend'
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Backend Artifact'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/backend'
+        ArtifactName: 'backend'
 
 - stage: AutomatedDependencyUpdate
   jobs:
