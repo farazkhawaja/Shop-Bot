@@ -3,7 +3,7 @@
 trigger: none
 
 schedules:
-- cron: "53 9 * * *"
+- cron: "03 10 * * *"
   displayName: Every day at midnight
   branches:
     include:
@@ -57,7 +57,7 @@ stages:
         git config --global user.name "Faraz Khawaja"
         git add client/package.json
         git commit -m "Update dependencies (Client)"
-        git push -u origin HEAD:main
+        git push --force -u origin HEAD:main
       displayName: 'Pushing to GitHub (Client)'
 
 
