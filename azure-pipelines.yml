@@ -35,6 +35,7 @@ stages:
       displayName: 'Set Python version'
 
     - script: |
+        cd server
         npm install -g eslint
         eslint --init
         eslint . > eslint-report.txt 2>&1
