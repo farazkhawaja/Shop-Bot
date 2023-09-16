@@ -23,8 +23,7 @@ stages:
     - script: |
         cd server
         npm install
-        eslint --init --yes
-        eslint . > eslint-report.txt 2>&1
+        npm run lint
       displayName: 'npm install'
     # - script: |
     #     npm run build
