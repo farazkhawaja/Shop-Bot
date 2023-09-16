@@ -18,6 +18,8 @@ stages:
   jobs:
   - job: AutomatedDependencyUpdateServerJob
     steps:
+    - checkout: self  # Add this step to check out the source code
+      persistCredentials: true  # Optionally persist credentials if needed
     - task: UsePythonVersion@0
       inputs:
         versionSpec: '3.x'
@@ -31,7 +33,8 @@ stages:
       displayName: 'Check and Update Dependencies (Server)'
 
     - script: |
-       
+        git config --global user.email "khwajafarazahmed@yahoo.com"
+        git config --global user.name "Faraz Khawaja"
         git add server/package.json
         git commit -m "Update dependencies (Server)"
         git push -u origin HEAD:main
