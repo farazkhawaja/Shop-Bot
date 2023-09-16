@@ -45,6 +45,8 @@ stages:
   jobs:
   - job: AutomatedDependencyUpdateClientJob
     steps:
+    - checkout: self  # Add this step to check out the source code
+      persistCredentials: true  # Optionally persist credentials if needed
     - task: UsePythonVersion@0
       inputs:
         versionSpec: '3.x'
