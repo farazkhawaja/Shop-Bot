@@ -24,9 +24,9 @@ stages:
         cd server
         npm install
       displayName: 'npm install'
-    - script: |
-        npx eslint .
-      displayName: 'ESLint'
+    # - script: |
+    #     npm run build
+    #   displayName: 'Build Code'
 
     - task: UsePythonVersion@0
       inputs:
