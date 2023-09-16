@@ -11,7 +11,7 @@ schedules:
   always: true
 
 pool:
-  name: default
+  vmImage: 'ubuntu-latest'
 
 stages:
 - stage: AutomatedDependencyUpdateServer
