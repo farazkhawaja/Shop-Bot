@@ -39,8 +39,9 @@ stages:
     - task: PublishBuildArtifacts@1
       displayName: 'Publish ESLint Report'
       inputs:
-        PathtoPublish: '$(System.DefaultWorkingDirectory)'
+        PathtoPublish: '$(Build.SourcesDirectory)/server/eslint-report.txt'
         ArtifactName: 'eslint-report'
+
 
     - task: CopyFiles@2
       displayName: 'Copy Backend Code'
