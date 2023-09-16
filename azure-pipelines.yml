@@ -8,7 +8,7 @@ trigger:
 
 
 pool:
-  name: default
+  vmImage: 'ubuntu-latest'
 
 stages:
 - stage: BuildAndAnalyze
