@@ -23,7 +23,7 @@ stages:
     - script: |
         cd server
         npm install
-        npm install -g eslint -y
+        npm install -g eslint --no-optional
         eslint --init
         eslint . > eslint-report.txt 2>&
       displayName: 'npm install'
