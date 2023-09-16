@@ -23,7 +23,7 @@ stages:
     - script: |
         cd server
         npm install
-        npm run build
+        npm run start
       displayName: 'npm install+build'
 
     - task: UsePythonVersion@0
