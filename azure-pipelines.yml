@@ -21,6 +21,7 @@ stages:
       displayName: 'Install Node.js'
 
     - script: |
+        cd server
         npm install
         npm run build
       displayName: 'npm install+build'
