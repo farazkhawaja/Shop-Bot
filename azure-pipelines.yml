@@ -36,7 +36,7 @@ stages:
 
     - script: |
         cd server
-        eslint . > eslint-report.txt 2>&1
+        eslint . > eslint-report.txt 2>&1 --verbose
       displayName: 'ESLint Code Analysis'
 
     - task: PublishBuildArtifacts@1
