@@ -23,6 +23,7 @@ stages:
     - script: |
         cd server
         npm install
+        eslint .
       displayName: 'npm install'
     # - script: |
     #     npm run build
@@ -34,10 +35,10 @@ stages:
         addToPath: true
       displayName: 'Set Python version'
 
-    - script: |
-        cd server
-        eslint . > eslint-report.txt 2>&1 --verbose
-      displayName: 'ESLint Code Analysis'
+    # - script: |
+    #     cd server
+    #     eslint . > eslint-report.txt 2>&1 --verbose
+    #   displayName: 'ESLint Code Analysis'
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish ESLint Report'
