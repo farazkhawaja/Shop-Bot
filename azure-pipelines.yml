@@ -1,11 +1,9 @@
-
 # Build a general Node.js project with npm.
 # Add steps that analyze code, save build artifacts, deploy, and more.
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
 - main
-
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -21,29 +19,22 @@ stages:
       displayName: 'Install Node.js'
 
     - script: |
-      cd server
-      npm install
-    displayName: 'npm install'
+        cd server
+        npm install
+      displayName: 'npm install'
 
     - script: |
-      cd server
-      npm run lint
-  displayName: 'npm run lint'
+        cd server
+        npm run lint
+      displayName: 'npm run lint'
 
-    # - script: |
-    #     npm run build
-    #   displayName: 'Build Code'
-
+    # Add more steps as needed
+    
     - task: UsePythonVersion@0
       inputs:
         versionSpec: '3.x'
         addToPath: true
       displayName: 'Set Python version'
-
-    # - script: |
-    #     cd server
-    #     eslint . > eslint-report.txt 2>&1 --verbose
-    #   displayName: 'ESLint Code Analysis'
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish ESLint Report'
@@ -63,4 +54,3 @@ stages:
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)/backend'
         ArtifactName: 'backend'
-
