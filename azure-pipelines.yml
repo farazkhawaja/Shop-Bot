@@ -49,7 +49,7 @@ stages:
         SourceFolder: '$(Build.SourcesDirectory)/server'
         Contents: |
             **\**
-            !**\node_modules\**
+            !node_modules\**
         TargetFolder: '$(Build.ArtifactStagingDirectory)/backend'
 
     - task: PublishBuildArtifacts@1
