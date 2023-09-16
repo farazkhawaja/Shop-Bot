@@ -25,6 +25,7 @@ stages:
       displayName: 'Set Python version'
 
     - script: |
+         npm install -g npm-check-updates
          cd server
          ncu -u 
       displayName: 'Check and Update Dependencies (Server)'
@@ -49,6 +50,7 @@ stages:
       displayName: 'Set Python version'
 
     - script: |
+         npm install -g npm-check-updates
          cd client
          ncu -u 
       displayName: 'Check and Update Dependencies (Client)'
