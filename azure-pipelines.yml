@@ -1,4 +1,4 @@
-# Node.js
+sx# Node.js
 # Build a general Node.js project with npm.
 # Add steps that analyze code, save build artifacts, deploy, and more.
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
@@ -17,7 +17,7 @@ stages:
     steps:
     - task: NodeTool@0
       inputs:
-        versionSpec: '12.x'
+        versionSpec: '14.x'
       displayName: 'Install Node.js'
 
     - script: |
