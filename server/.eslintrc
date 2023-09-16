@@ -20,7 +20,8 @@
   "ignorePatterns": [
     ".vscode",
     ".devcontainer",
-    "dist"
+    "dist",
+    "node_modules"
   ],
   "rules": {
     "semi": [
