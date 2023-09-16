@@ -23,8 +23,10 @@ stages:
     - script: |
         cd server
         npm install
-        npm run build --verbose
-      displayName: 'npm install+build'
+      displayName: 'npm install'
+    - script: |
+        npx eslint .
+      displayName: 'ESLint'
 
     - task: UsePythonVersion@0
       inputs:
