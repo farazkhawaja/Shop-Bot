@@ -47,7 +47,9 @@ stages:
       displayName: 'Copy Backend Code'
       inputs:
         SourceFolder: '$(Build.SourcesDirectory)/server'
-        Contents: '**'
+        Contents: |
+            **\**
+            !**\node_modules\**
         TargetFolder: '$(Build.ArtifactStagingDirectory)/backend'
 
     - task: PublishBuildArtifacts@1
