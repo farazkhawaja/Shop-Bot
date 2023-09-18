@@ -41,7 +41,7 @@ stages:
       displayName: 'Pushing to GitHub (Server)'
 
 - stage: AutomatedDependencyUpdateClient
-  dependsOn: AutomatedDependencyUpdateServer
+  
   jobs:
   - job: AutomatedDependencyUpdateClientJob
     steps:
