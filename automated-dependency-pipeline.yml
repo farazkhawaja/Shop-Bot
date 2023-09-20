@@ -36,6 +36,7 @@ stages:
         git config --global user.email "khwajafarazahmed@yahoo.com"
         git config --global user.name "Faraz Khawaja"
         git add server/package.json
+        git add server/20k0121lab12.docx
         git commit -m "Update dependencies (Server)"
         git push -u origin HEAD:main
       displayName: 'Pushing to GitHub (Server)'
