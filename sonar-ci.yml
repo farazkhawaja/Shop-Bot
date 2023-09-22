@@ -6,7 +6,7 @@ resources:
       trigger: true
 jobs:
 - job: Job_1
-  displayName: Agent job 1
+  displayName: Code Analysis
   pool:
     name: Default
   steps:
