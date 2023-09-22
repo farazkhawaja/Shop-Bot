@@ -6,18 +6,32 @@ trigger:
 - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: default
 
 stages:
 - stage: BuildAndAnalyze
   jobs:
   - job: BuildAndAnalyzeJob
     steps:
+    - checkout: self
+      fetchDepth: 1      
+    - task: SonarCloudPrepare@1
+      displayName: Prepare analysis on SonarCloud
+      inputs:
+        SonarCloud: c49a14d2-f70e-46f9-8475-d950d88597a8
+        organization: k200121faraz
+        scannerMode: CLI
+        configMode: manual
+        cliProjectKey: k200121Faraz_Shop-Bot.git
+        cliProjectName: Shop-Bot.git  
     - task: NodeTool@0
       inputs:
         versionSpec: '14.x'
       displayName: 'Install Node.js'
-
+    - task: SonarCloudAnalyze@1
+      displayName: Run Code Analysis
+    - task: SonarCloudPublish@1
+      displayName: Publish Quality Gate Result      
     - script: |
         cd server
         npm install
