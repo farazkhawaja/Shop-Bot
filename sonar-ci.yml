@@ -1,3 +1,9 @@
+
+resources:
+  pipelines:
+    - pipeline: pipeline-trigger
+      source: build
+      trigger: true
 jobs:
 - job: Job_1
   displayName: Agent job 1
