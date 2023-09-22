@@ -28,10 +28,7 @@ stages:
       inputs:
         versionSpec: '14.x'
       displayName: 'Install Node.js'
-    - task: SonarCloudAnalyze@1
-      displayName: Run Code Analysis
-    - task: SonarCloudPublish@1
-      displayName: Publish Quality Gate Result      
+         
     - script: |
         cd server
         npm install
@@ -56,7 +53,10 @@ stages:
         PathtoPublish: '$(Build.SourcesDirectory)/server/eslint-report.txt'
         ArtifactName: 'eslint-report'
 
-
+    - task: SonarCloudAnalyze@1
+      displayName: Run Code Analysis
+    - task: SonarCloudPublish@1
+      displayName: Publish Quality Gate Result 
     - task: CopyFiles@2
       displayName: 'Copy Backend Code'
       inputs:
