@@ -11,6 +11,7 @@ jobs:
     vmImage: 'ubuntu-latest'
   steps:
   - checkout: self
+    fetchDepth: 0
   - task: SonarCloudPrepare@1
     displayName: Prepare analysis on SonarCloud
     inputs:
