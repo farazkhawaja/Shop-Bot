@@ -2,13 +2,13 @@
 
 trigger: none
 
-schedules:
-- cron: "0 19 * * *"
-  displayName: Every day at midnight GMT+5
-  branches:
-    include:
-    - main
-  always: true
+# schedules:
+# - cron: "0 19 * * *"
+#   displayName: Every day at midnight GMT+5
+#   branches:
+#     include:
+#     - main
+#   always: true
 
 pool:
   vmImage: 'ubuntu-latest'
