@@ -1,58 +1,79 @@
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more.
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+  trigger:
+  - main
+  
+  pool:
+    vmImage: 'ubuntu-latest'
+  
+  stages:
+  - stage: BuildAndAnalyze
+    jobs:
+    - job: BuildClient
+      displayName: 'Build Client'
+      steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '14.x'
+        displayName: 'Install Node.js (Client)'
+  
+      - script: |
+          cd client
+          npm install
+        displayName: 'npm install (Client)'
 
-trigger:
-- main
+      - script: |
+          cd client
+          npm run lint > eslint-report-client.txt
+        displayName: 'npm run lint (Client)'
 
-pool:
-  vmImage: 'ubuntu-latest'
-
-stages:
-- stage: BuildAndAnalyze
-  jobs:
-  - job: BuildAndAnalyzeJob
-    steps:
-    - task: NodeTool@0
-      inputs:
-        versionSpec: '14.x'
-      displayName: 'Install Node.js'   
-    - script: |
-        cd server
-        npm install
-      displayName: 'npm install'
-
-    - script: |
-        cd server
-        npm run lint > eslint-report.txt
-      displayName: 'npm run lint'
-
-    # Add more steps as needed
-    
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '3.x'
-        addToPath: true
-      displayName: 'Set Python version'
-
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish ESLint Report'
-      inputs:
-        PathtoPublish: '$(Build.SourcesDirectory)/server/eslint-report.txt'
-        ArtifactName: 'eslint-report'
-
-
-    - task: CopyFiles@2
-      displayName: 'Copy Backend Code'
-      inputs:
-        SourceFolder: '$(Build.SourcesDirectory)/server'
-        Contents: |
-            **/*
-            !node_modules/**/*
-        TargetFolder: '$(Build.ArtifactStagingDirectory)/backend'
-
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Backend Artifact'
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)/backend'
-        ArtifactName: 'backend'
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish ESLint Report (Client)'
+        inputs:
+            PathtoPublish: '$(Build.SourcesDirectory)/client/eslint-report-client.txt'
+            ArtifactName: 'eslint-report-client'
+      
+      
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Client Artifact'
+        inputs:
+          PathtoPublish: '$(Build.SourcesDirectory)/client/build'
+          ArtifactName: 'client'
+  
+    - job: BuildServer
+      displayName: 'Build Server'
+      steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '14.x'
+        displayName: 'Install Node.js (Server)'
+  
+      - script: |
+          cd server
+          npm install
+        displayName: 'npm install (Server)'
+  
+      - script: |
+          cd server
+          npm run lint > eslint-report-server.txt
+        displayName: 'npm run lint (Server)'
+  
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish ESLint Report (Server)'
+        inputs:
+          PathtoPublish: '$(Build.SourcesDirectory)/server/eslint-report-server.txt'
+          ArtifactName: 'eslint-report-server'
+  
+      - task: CopyFiles@2
+        displayName: 'Copy Backend Code'
+        inputs:
+          SourceFolder: '$(Build.SourcesDirectory)/server'
+          Contents: |
+              **/*
+              !node_modules/**/*
+          TargetFolder: '$(Build.ArtifactStagingDirectory)/backend'
+  
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Backend Artifact (Server)'
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)/backend'
+          ArtifactName: 'backend-server'
+  
