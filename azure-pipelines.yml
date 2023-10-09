@@ -34,7 +34,7 @@
       - script: |
           cd client
           npm run build
-        displayName: 'npm run lint (Client)'
+        displayName: 'npm run built (Client)'
 
       - task: PublishBuildArtifacts@1
         displayName: 'Publish Client Artifact'
