@@ -31,7 +31,11 @@
             PathtoPublish: '$(Build.SourcesDirectory)/client/eslint-report-client.txt'
             ArtifactName: 'eslint-report-client'
       
-      
+      - script: |
+          cd client
+          npm run build
+        displayName: 'npm run lint (Client)'
+
       - task: PublishBuildArtifacts@1
         displayName: 'Publish Client Artifact'
         inputs:
