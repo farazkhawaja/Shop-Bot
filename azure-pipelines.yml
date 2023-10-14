@@ -83,6 +83,9 @@
           ArtifactName: 'backend-server'
     
     - job: BuildAndPushDockerImages
+      dependsOn: 
+      - BuildClient
+      - BuildServer
       steps:
       - task: DockerCompose@0
         inputs:
