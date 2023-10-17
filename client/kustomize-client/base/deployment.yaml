@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-frontend
+  template:
+    metadata:
+      labels:
+        app: my-frontend
+    spec:
+      containers:
+        - name: my-frontend
+          image: farazkhawaja/frontend:latest  # This will be updated with Kustomize
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
