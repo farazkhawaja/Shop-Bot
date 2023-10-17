@@ -3,9 +3,6 @@
 replicaCount: 5
 container:
   name: my-frontend-prod
-image:
-  repository: farazkhawaja/frontend
-  tag: latest
 resources:
   limits:
     memory: 1024Mi

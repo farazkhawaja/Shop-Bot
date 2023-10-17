@@ -3,7 +3,5 @@ container:
   name: my-frontend-dev
 
 replicaCount: 1
-image:
-  repository: farazkhawaja/frontend
-  tag: latest
+
 
