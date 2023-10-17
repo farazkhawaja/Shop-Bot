@@ -3,9 +3,11 @@ kind: Service
 metadata:
   name: frontend-service
 spec:
+  
   selector:
     app: my-frontend
   ports:
-    - port: 3000
+    - port: 443
       targetPort: 3000
+      protocol: TCP
   type: LoadBalancer
