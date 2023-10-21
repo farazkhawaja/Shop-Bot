@@ -103,3 +103,16 @@
           action: 'Push services'
           includeSourceTags: true
           includeLatestTag: true
+      - task: HelmInstaller@0
+        inputs:
+          helmVersion: '2.14.1'
+          installKubectl: true
+      - task: HelmDeploy@0
+        inputs:
+          command: 'package'
+          chartPath: 'client/helm-client'
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: '$(Build.ArtifactStagingDirectory)'
+          artifact: 'helm-package'
+          publishLocation: 'pipeline'
