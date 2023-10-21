@@ -36,10 +36,19 @@
           npm run build
         displayName: 'npm run built (Client)'
 
+      - task: CopyFiles@2
+        displayName: 'Copy Backend Code'
+        inputs:
+          SourceFolder: '$(Build.SourcesDirectory)/client'
+          Contents: |
+              **/*
+              !node_modules/**/*
+          TargetFolder: '$(Build.ArtifactStagingDirectory)/client'    
+          
       - task: PublishBuildArtifacts@1
         displayName: 'Publish Client Artifact'
         inputs:
-          PathtoPublish: '$(Build.SourcesDirectory)/client/build'
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)/client'
           ArtifactName: 'client'
   
           
