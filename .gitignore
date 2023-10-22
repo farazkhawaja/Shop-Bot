@@ -1,5 +1,15 @@
 client/node_modules
 client/build
 server/node_modules
+/1.8+
 .gitignore
 old-pipeline.yml
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+.terraform*
+
+# .tfvars files
+*.tfvars
