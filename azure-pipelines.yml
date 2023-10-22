@@ -67,7 +67,7 @@
 
       - script: |
           trivy -v
-          trivy image farazkhawaja/frontend:$(Build.BuildId) -f json | tee /tmp/trivy_scan.json
+          trivy image --format table farazkhawaja/frontend:$(Build.BuildId) | tee /tmp/trivy_scan.txt
         displayName: 'Scan Docker Image'
       - task: PublishBuildArtifacts@1
         inputs:
