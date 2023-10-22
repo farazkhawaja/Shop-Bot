@@ -14,7 +14,7 @@ services:
   nodejs-app:
     build:
       context: ./server  # Replace with the path to your Node.js app code
-    image: farazkhawaja/backend
+    image: '$(bimageTag)'
     depends_on:
       - mongodb
     environment:
@@ -24,7 +24,7 @@ services:
   frontend:
     build:
       context: ./client  # Path to the React app directory
-    image: farazkhawaja/frontend
+    image: '$(fimageTag)'
     ports:
       - '3000:3000'
 volumes:
