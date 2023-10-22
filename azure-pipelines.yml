@@ -61,9 +61,9 @@
         displayName: DockerBuild
       - script: |
         displayName: Trivy
-          curl -sfL -o /usr/local/bin/trivy https://github.com/aquasecurity/trivy/releases/download/v0.20.0/trivy_linux_amd64
-          chmod +x /usr/local/bin/trivy
-          trivy image farazkhawaja/frontend:latest
+         curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s — -b /usr/local/bin v0.29.2
+         trivy -v
+         trivy image farazkhawaja/frontend:latest
       
           
     # - job: BuildServer
