@@ -17,10 +17,10 @@
           versionSpec: '14.x'
         displayName: 'Install Node.js (Client)'
   
-      - script: |
-          cd client
-          npm install
-        displayName: 'npm install (Client)'
+      # - script: |
+      #     cd client
+      #     npm install
+      #   displayName: 'npm install (Client)'
 
       - script: |
           cd client
@@ -33,10 +33,10 @@
             PathtoPublish: '$(Build.SourcesDirectory)/client/eslint-report-client.txt'
             ArtifactName: 'eslint-report-client'
       
-      - script: |
-          cd client
-          npm run build
-        displayName: 'npm run built (Client)'
+      # - script: |
+      #     cd client
+      #     npm run build
+      #   displayName: 'npm run built (Client)'
 
       - task: CopyFiles@2
         displayName: 'Copy Frontend Code'
@@ -63,7 +63,7 @@
         displayName: Trivy
           curl -sfL -o /usr/local/bin/trivy https://github.com/aquasecurity/trivy/releases/download/v0.20.0/trivy_linux_amd64
           chmod +x /usr/local/bin/trivy
-          trivy image "farazkhawaja/frontend:$(Build.BuildId)"
+          trivy image farazkhawaja/frontend:latest
       
           
     # - job: BuildServer
