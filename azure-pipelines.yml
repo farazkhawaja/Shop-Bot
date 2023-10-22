@@ -4,12 +4,7 @@
   pool:
     vmImage: 'ubuntu-latest'
   
-  variables:
-    fimageName: 'farazkhawaja/frontend'
-    fimageTag: '$(fimageName):$(Build.BuildId)'
-    bimageName: 'farazkhawaja/backend'
-    bimageTag: '$(bimageName):$(Build.BuildId)'
-
+  
   
   stages:
   - stage: BuildAndAnalyze
@@ -61,70 +56,77 @@
         inputs:
           containerRegistry: 'dockerhub'
           repository: 'farazkhawaja/frontend'
-          command: 'buildAndPush'
+          command: 'build'
           Dockerfile: 'client/Dockerfile'
+        displayName: DockerBuild
+      - script: |
+        displayName: Trivy
+          curl -sfL -o /usr/local/bin/trivy https://github.com/aquasecurity/trivy/releases/download/v0.20.0/trivy_linux_amd64
+          chmod +x /usr/local/bin/trivy
+          trivy image "farazkhawaja/frontend:$(Build.BuildId)"
+      
           
-    - job: BuildServer
-      displayName: 'Build Server'
-      steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: '14.x'
-        displayName: 'Install Node.js (Server)'
+    # - job: BuildServer
+    #   displayName: 'Build Server'
+    #   steps:
+    #   - task: NodeTool@0
+    #     inputs:
+    #       versionSpec: '14.x'
+    #     displayName: 'Install Node.js (Server)'
   
-      - script: |
-          cd server
-          npm install
-        displayName: 'npm install (Server)'
+    #   - script: |
+    #       cd server
+    #       npm install
+    #     displayName: 'npm install (Server)'
   
-      - script: |
-          cd server
-          npm run lint > eslint-report-server.txt
-        displayName: 'npm run lint (Server)'
+    #   - script: |
+    #       cd server
+    #       npm run lint > eslint-report-server.txt
+    #     displayName: 'npm run lint (Server)'
   
-      - task: PublishBuildArtifacts@1
-        displayName: 'Publish ESLint Report (Server)'
-        inputs:
-          PathtoPublish: '$(Build.SourcesDirectory)/server/eslint-report-server.txt'
-          ArtifactName: 'eslint-report-server'
+    #   - task: PublishBuildArtifacts@1
+    #     displayName: 'Publish ESLint Report (Server)'
+    #     inputs:
+    #       PathtoPublish: '$(Build.SourcesDirectory)/server/eslint-report-server.txt'
+    #       ArtifactName: 'eslint-report-server'
   
-      - task: CopyFiles@2
-        displayName: 'Copy Backend Code'
-        inputs:
-          SourceFolder: '$(Build.SourcesDirectory)/server'
-          Contents: |
-              **/*
-              !node_modules/**/*
-          TargetFolder: '$(Build.ArtifactStagingDirectory)/backend'
+    #   - task: CopyFiles@2
+    #     displayName: 'Copy Backend Code'
+    #     inputs:
+    #       SourceFolder: '$(Build.SourcesDirectory)/server'
+    #       Contents: |
+    #           **/*
+    #           !node_modules/**/*
+    #       TargetFolder: '$(Build.ArtifactStagingDirectory)/backend'
   
-      - task: PublishBuildArtifacts@1
-        displayName: 'Publish Backend Artifact (Server)'
-        inputs:
-          PathtoPublish: '$(Build.ArtifactStagingDirectory)/backend'
-          ArtifactName: 'backend-server'
-      - task: Docker@2
-        inputs:
-          containerRegistry: 'dockerhub'
-          repository: 'farazkhawaja/backend'
-          command: 'buildAndPush'
-          Dockerfile: 'server/Dockerfile'
+    #   - task: PublishBuildArtifacts@1
+    #     displayName: 'Publish Backend Artifact (Server)'
+    #     inputs:
+    #       PathtoPublish: '$(Build.ArtifactStagingDirectory)/backend'
+    #       ArtifactName: 'backend-server'
+    #   - task: Docker@2
+    #     inputs:
+    #       containerRegistry: 'dockerhub'
+    #       repository: 'farazkhawaja/backend'
+    #       command: 'buildAndPush'
+    #       Dockerfile: 'server/Dockerfile'
     
-    - job: HelmInstall
-      dependsOn: 
-      - BuildClient
-      - BuildServer
-      steps:
+    # - job: HelmInstall
+    #   dependsOn: 
+    #   - BuildClient
+    #   - BuildServer
+    #   steps:
 
-      - task: HelmInstaller@0
-        inputs:
-          helmVersion: '2.14.1'
-          installKubectl: true
-      - task: HelmDeploy@0
-        inputs:
-          command: 'package'
-          chartPath: 'client/helm-client'
-      - task: PublishPipelineArtifact@1
-        inputs:
-          targetPath: '$(Build.ArtifactStagingDirectory)'
-          artifact: 'helm-package'
-          publishLocation: 'pipeline'
+    #   - task: HelmInstaller@0
+    #     inputs:
+    #       helmVersion: '2.14.1'
+    #       installKubectl: true
+    #   - task: HelmDeploy@0
+    #     inputs:
+    #       command: 'package'
+    #       chartPath: 'client/helm-client'
+    #   - task: PublishPipelineArtifact@1
+    #     inputs:
+    #       targetPath: '$(Build.ArtifactStagingDirectory)'
+    #       artifact: 'helm-package'
+    #       publishLocation: 'pipeline'
