@@ -60,11 +60,22 @@
           Dockerfile: 'client/Dockerfile'
         displayName: DockerBuild
       - script: |
-         sudo apt-get install rpm
-         wget https://github.com/aquasecurity/trivy/releases/download/v0.46.0/trivy_0.46.0_Linux-64bit.deb
-         sudo dpkg -i trivy_0.46.0_Linux-64bit.deb
-         trivy -v 
-         trivy image farazkhawaja/frontend:$(Build.BuildId)
+          sudo apt-get install rpm
+          wget https://github.com/aquasecurity/trivy/releases/download/v0.46.0/trivy_0.46.0_Linux-64bit.deb
+          sudo dpkg -i trivy_0.46.0_Linux-64bit.deb
+        displayName: 'Install Trivy'
+
+      - script: |
+          trivy -v
+          trivy image farazkhawaja/frontend:$(Build.BuildId) -f json -o /tmp/trivy_scan.json
+        displayName: 'Scan Docker Image'
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: '/tmp/trivy_scan.json'
+          ArtifactName: 'TrivyScanResults'
+          publishLocation: 'Container'
+        displayName: 'Publish Trivy Scan Results'
+
       
           
     # - job: BuildServer
