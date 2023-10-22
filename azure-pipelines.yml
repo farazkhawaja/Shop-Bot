@@ -57,7 +57,12 @@
         inputs:
           PathtoPublish: '$(Build.ArtifactStagingDirectory)/client'
           ArtifactName: 'client'
-  
+      - task: Docker@2
+        inputs:
+          containerRegistry: 'dockerhub'
+          repository: 'farazkhawaja/frontend'
+          command: 'buildAndPush'
+          Dockerfile: 'client/Dockerfile'
           
     - job: BuildServer
       displayName: 'Build Server'
@@ -97,25 +102,18 @@
         inputs:
           PathtoPublish: '$(Build.ArtifactStagingDirectory)/backend'
           ArtifactName: 'backend-server'
+      - task: Docker@2
+        inputs:
+          containerRegistry: 'dockerhub'
+          repository: 'farazkhawaja/backend'
+          command: 'buildAndPush'
+          Dockerfile: 'server/Dockerfile'
     
-    - job: BuildAndPushDockerImages
+    - job: HelmInstall
       dependsOn: 
       - BuildClient
       - BuildServer
       steps:
-      - task: DockerCompose@0
-        inputs:
-          containerregistrytype: 'Container Registry'
-          dockerRegistryEndpoint: 'dockerhub'
-          dockerComposeFile: '**/docker-compose.yml'
-          action: 'Build services'
-          
-      - task: DockerCompose@0
-        inputs:
-          containerregistrytype: 'Container Registry'
-          dockerRegistryEndpoint: 'dockerhub'
-          dockerComposeFile: '**/docker-compose.yml'
-          action: 'Push services'
 
       - task: HelmInstaller@0
         inputs:
