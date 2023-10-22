@@ -71,7 +71,7 @@
         displayName: 'Scan Docker Image'
       - task: PublishBuildArtifacts@1
         inputs:
-          PathtoPublish: '/tmp/trivy_scan.json'
+          PathtoPublish: '/tmp/trivy_scan.txt'
           ArtifactName: 'TrivyScanResults'
           publishLocation: 'Container'
         displayName: 'Publish Trivy Scan Results'
