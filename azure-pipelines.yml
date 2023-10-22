@@ -60,8 +60,10 @@
           Dockerfile: 'client/Dockerfile'
         displayName: DockerBuild
       - script: |
-         curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s — -b /usr/local/bin v0.29.2
-         trivy -v
+         sudo apt-get install rpm
+         wget https://github.com/aquasecurity/trivy/releases/download/v0.46.0/trivy_0.46.0_Linux-64bit.deb
+         sudo dpkg -i trivy_0.46.0_Linux-64bit.deb
+         trivy -v 
          trivy image farazkhawaja/frontend:$(Build.BuildId)
       
           
