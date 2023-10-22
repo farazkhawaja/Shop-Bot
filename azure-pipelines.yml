@@ -60,10 +60,9 @@
           Dockerfile: 'client/Dockerfile'
         displayName: DockerBuild
       - script: |
-        displayName: Trivy
          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s — -b /usr/local/bin v0.29.2
          trivy -v
-         trivy image farazkhawaja/frontend:latest
+         trivy image farazkhawaja/frontend:$(Build.BuildId)
       
           
     # - job: BuildServer
