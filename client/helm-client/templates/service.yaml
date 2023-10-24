@@ -10,6 +10,6 @@ spec:
     - port: {{ .Values.service.port }}
       targetPort: 3000
       protocol: TCP
-      name: http
+      name: {{ .Values.container.name}}
   selector:
     app: {{ .Values.container.name}}
