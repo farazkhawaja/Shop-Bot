@@ -4,4 +4,5 @@ container:
 
 replicaCount: 1
 
-
+service:
+  port: 3001
