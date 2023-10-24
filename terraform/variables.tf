@@ -1,5 +1,5 @@
 variable "agent_count" {
-  default = 3
+  default = 1
 }
 
 # The following two variable declarations are placeholder references.
@@ -25,7 +25,7 @@ variable "dns_prefix" {
 }
 
 variable "resource_group_location" {
-  default     = "West Europe"
+  default     = "EAST US"
   description = "Location of the resource group."
 }
 
