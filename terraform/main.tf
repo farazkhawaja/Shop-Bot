@@ -26,7 +26,18 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
 
   network_profile {
-    load_balancer_sku = "basic"
+    load_balancer_sku = "standard"
     network_plugin    = "kubenet" 
+  }
+  
+  
+}
+provider "kubernetes" {
+  config_path = "~/.kube/config" # Path to your kubeconfig file
+}
+
+resource "kubernetes_namespace" "prod" {
+  metadata {
+    name = "prod"
   }
 }
